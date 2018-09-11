@@ -5,11 +5,13 @@
   "main": "extension/background.js",
   "scripts": {
     "test": "web-ext --config web-ext-config.js run",
-    "build": "web-ext --config web-ext-config.js sign"
+    "build:crx": "crx pack extension -o build/call-google-translate.crx",
+    "build:xpi": "web-ext --config web-ext-config.js sign"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "crx": "^3.2.1",
     "web-ext": "^2.9.1"
   }
 }

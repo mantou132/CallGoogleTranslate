@@ -1,5 +1,5 @@
-为 [Google 翻译](https://github.com/mantou132/GoogleTranslate) Mac App 添加浏览器上下文菜单支持；
-目前只打包 Firefox 版本，Chrome 版本未通过测试
+为 [Google 翻译](https://github.com/mantou132/GoogleTranslate) Mac App 添加浏览器上下文菜单支持，
+支持 Firefox 和 Chrome 浏览器。
 
 ## 工作方式
 
