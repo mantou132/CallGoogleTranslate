@@ -3,22 +3,20 @@ On startup, connect to the "ping_pong" app.
 */
 const port = chrome.runtime.connectNative('google_translate');
 
-/*
-Listen for messages from the app.
-*/
-port.onMessage.addListener((response) => {
-  console.log('Received: ' + response);
-});
-
-
 // ----------------- Context Menu --------------------------
-chrome.contextMenus.create({
-  id: 'copyplaintext',
-  title: 'Google Translate',
-  contexts: ['selection'],
-  documentUrlPatterns: ['<all_urls>'],                      // limiting to supported schemes
-  onclick : process
-});
+function createMenu() {
+  chrome.contextMenus.create({
+    id: 'googletranslate',
+    title: 'Google Translate',
+    contexts: ['selection'],
+    documentUrlPatterns: ['<all_urls>'],                      // limiting to supported schemes
+    onclick : process
+  });
+}
+
+function removeMenu() {
+  chrome.contextMenus.remove('googletranslate');
+}
 
 function process(info, tab, command) {
   const code = `(() => {
@@ -32,3 +30,16 @@ function process(info, tab, command) {
     result[0] && port.postMessage(result[0]);
   });
 }
+
+
+/*
+Listen for messages from the app.
+*/
+port.onMessage.addListener((response) => {
+  switch (response) {
+    case 'connect':
+      return createMenu();
+    case 'disconnect':
+      return removeMenu();
+  }
+});
