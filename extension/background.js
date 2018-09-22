@@ -18,7 +18,7 @@ function removeMenu() {
   chrome.contextMenus.remove('googletranslate');
 }
 
-function process(info, tab, command) {
+function process({frameId}, tab, command) {
   const code = `(() => {
     const node = document.activeElement;
     return node && ['TEXTAREA', 'INPUT'].includes(node.nodeName) ?
@@ -26,7 +26,7 @@ function process(info, tab, command) {
             window.getSelection().toString();
   })();`
 
-  chrome.tabs.executeScript({code}, (result = []) => {
+  chrome.tabs.executeScript({code, frameId}, (result = []) => {
     result[0] && port.postMessage(result[0]);
   });
 }
