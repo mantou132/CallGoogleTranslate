@@ -16,4 +16,7 @@ module.exports = {
     apiKey: api.apiKey,
     apiSecret: api.apiSecret,
   },
+  build: {
+    overwriteDest: true
+  }
 };

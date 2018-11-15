@@ -1,3 +1,4 @@
 /node_modules/
 /build/
 apikey.js
+.DS_Store
