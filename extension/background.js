@@ -1,7 +1,8 @@
 /*
 On startup, connect to the "ping_pong" app.
 */
-const port = chrome.runtime.connectNative('google-translate-bridge');
+// parameter application must match /^\w+(\.\w+)*$/ for runtime.connectNative.
+const port = chrome.runtime.connectNative('google_translate_bridge');
 
 // ----------------- Context Menu --------------------------
 function createMenu() {
