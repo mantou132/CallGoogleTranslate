@@ -3,7 +3,7 @@ const api = {};
 try {
   Object.assign(api, require('./apikey'));
 } catch (e) {}
-
+console.log(api);
 module.exports = {
   sourceDir: 'extension',
   artifactsDir: 'build',
