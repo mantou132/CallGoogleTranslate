@@ -10,13 +10,13 @@ module.exports = {
   verbose: true,
   run: {
     firefox: 'nightly',
-    startUrl: ['about:debugging', 'https://www.mozilla.com',],
+    startUrl: ['about:debugging', 'http://example.com/'],
   },
   sign: {
-    apiKey: api.apiKey,
-    apiSecret: api.apiSecret,
+    apiKey: api.apiKey || '',
+    apiSecret: api.apiSecret || '',
   },
   build: {
-    overwriteDest: true
-  }
+    overwriteDest: true,
+  },
 };
