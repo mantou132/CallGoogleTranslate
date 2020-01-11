@@ -2,20 +2,18 @@
   "name": "Call Google Translate",
   "description": "使用谷歌翻译(https://github.com/mantou132/GoogleTranslate)翻译选择的文本",
   "manifest_version": 2,
-  "version": "1.0.4",
-
+  "version": "1.0.5",
   "icons": {
     "256": "icon.png"
   },
-
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+      "background.js"
+    ]
   },
-  
   "permissions": [
     "<all_urls>",
     "contextMenus",
     "nativeMessaging"
   ]
-
 }
