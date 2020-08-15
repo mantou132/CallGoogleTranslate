@@ -1,6 +1,7 @@
 import { browser, Menus, Runtime } from 'webextension-polyfill-ts';
 
 class PortManager {
+  connected = false;
   port: Runtime.Port;
 
   start = () => {
@@ -15,12 +16,12 @@ class PortManager {
     });
 
     this.port.onDisconnect.addListener(() => {
-      console.log('disconnect, retry after 10s');
+      console.log('disconnect, will try again later');
       this.removeMenu();
       setTimeout(() => {
         this.start();
         console.log('retrying');
-      }, 10_000);
+      }, 1_000);
     });
   };
 
@@ -42,6 +43,7 @@ class PortManager {
   };
 
   createMenu = () => {
+    this.connected = true;
     browser.contextMenus.create({
       id: 'googletranslate',
       title: 'Google Translate',
@@ -52,8 +54,18 @@ class PortManager {
   };
 
   removeMenu = () => {
+    this.connected = false;
     browser.contextMenus.remove('googletranslate');
   };
 }
 
-new PortManager().start();
+const portManager = new PortManager();
+portManager.start();
+
+browser.runtime.onInstalled.addListener(({ reason }) => {
+  setTimeout(() => {
+    if (reason === 'install' && !portManager.connected) {
+      browser.tabs.create({ url: browser.runtime.getURL('welcome.html') });
+    }
+  }, 1_000);
+});
