@@ -1,18 +1,23 @@
 {
+  "$schema": "https://raw.githubusercontent.com/extend-chrome/manifest-json-schema/main/schema/manifest.schema.json",
   "name": "Call Google Translate",
   "description": "使用谷歌翻译(https://github.com/mantou132/GoogleTranslate)翻译选择的文本",
-  "manifest_version": 2,
-  "version": "1.0.6",
+  "manifest_version": 3,
+  "version": "1.0.7",
   "icons": {
     "256": "icon.png"
   },
-  "background": {
-    "scripts": [
-      "background.js"
-    ]
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{fa233117-785b-4da4-a4a2-6f5312c6381b}"
+    }
   },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "host_permissions": ["<all_urls>"],
   "permissions": [
-    "<all_urls>",
+    "scripting",
     "contextMenus",
     "nativeMessaging"
   ]

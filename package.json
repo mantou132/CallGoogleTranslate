@@ -1,11 +1,11 @@
 {
   "name": "call-google-translate",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "scripts": {
     "lint": "tsc --noEmit && eslint --ext .ts --fix src/",
     "start": "web-ext --config web-ext.config.js run",
-    "build": "webpack --mode=development",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode=development",
     "build:xpi": "npm run build && web-ext --config web-ext.config.js sign",
     "build:zip": "npm run build && web-ext --config web-ext.config.js build",
     "watch": "npm run build -- --watch"
@@ -13,9 +13,10 @@
   "author": "mantou132",
   "license": "ISC",
   "dependencies": {
-    "webextension-polyfill-ts": "^0.14.0"
+    "webextension-polyfill": "^0.12.0"
   },
   "devDependencies": {
+    "@types/webextension-polyfill": "^0.10.7",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "babel-eslint": "^10.1.0",
