@@ -14,7 +14,7 @@ if (window.matchMedia('not (display-mode: browser)').matches) {
 
   // Hijack window.open
   window.open = function(url?: string | URL, target?: string, features?: string): Window | null {
-    if (url) {
+    if (url && target === '_blank') {
       const urlString = url.toString();
       // Send IPC message to background
       runtime.sendMessage({
@@ -38,7 +38,7 @@ if (window.matchMedia('not (display-mode: browser)').matches) {
 
       if (target instanceof HTMLAnchorElement) {
         const href = target.href;
-        if (href) {
+        if (href && target.target === '_blank') {
           // Prevent default behavior
           event.preventDefault();
           event.stopPropagation();
