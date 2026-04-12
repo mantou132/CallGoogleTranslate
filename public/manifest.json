@@ -3,7 +3,7 @@
   "name": "Call Google Translate",
   "description": "使用谷歌翻译(https://github.com/mantou132/GoogleTranslate)翻译选择的文本",
   "manifest_version": 3,
-  "version": "1.0.7",
+  "version": "1.0.8",
   "icons": {
     "256": "icon.png"
   },
