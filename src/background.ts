@@ -44,9 +44,19 @@ class PortManager {
 const portManager = new PortManager();
 portManager.start();
 
+// Handle open-url messages from content scripts (PWA link handler)
+runtime.onMessage.addListener(message => {
+  if (message.type === 'open-url' && message.data) {
+    portManager.port.postMessage({
+      type: 'open-url',
+      data: message.data,
+    });
+  }
+});
+
 contextMenus.onClicked.addListener(async function(info) {
   switch (info.menuItemId) {
-    case 'googletranslate':
+    case 'googletranslate': {
       const [tab] = await tabs.query({ active: true, currentWindow: true });
       if (!tab?.id) break;
       scripting
@@ -73,6 +83,9 @@ contextMenus.onClicked.addListener(async function(info) {
             });
         });
       break;
+    }
+    default:
+      throw new Error('unreachable');
   }
 });
 

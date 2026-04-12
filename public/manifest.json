@@ -15,10 +15,13 @@
   "background": {
     "service_worker": "background.js"
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["pwa-link-handler.js"],
+      "run_at": "document_start"
+    }
+  ],
   "host_permissions": ["<all_urls>"],
-  "permissions": [
-    "scripting",
-    "contextMenus",
-    "nativeMessaging"
-  ]
+  "permissions": ["scripting", "contextMenus", "nativeMessaging"]
 }
